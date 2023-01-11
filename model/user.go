@@ -16,18 +16,23 @@ type User struct {
 // Userを引数に Userとerrorを返す
 func UserAdd(u User) error {
 	db := Connect()
-	result := db.Create(&u)
+	result := db.Debug().Create(&u)
 	return result.Error
 }
 
-// intを引数に、Userとerrorを返す
+// intを引数に、Userを検索
 func GetUser(id int) (User, error) {
 	db := Connect()
 	u := User{}
-	result := db.Where("id = ?", id).First(&u)
+	result := db.Debug().Where("id = ?", id).First(&u)
 	//fmt.Println(u, result.Error)
 	return u, result.Error
 }
+
+/* 条件を指定してUserを検索
+ * 例：Age < 20
+ * Created_at 2022-01-01 ~ 2022-04-01など
+ */
 
 // 引数無しに、[]Userとerrorを返す
 func GetListUsers() ([]User, error) {
@@ -38,22 +43,14 @@ func GetListUsers() ([]User, error) {
 	return users, result.Error
 }
 
-func GetOrder(serch User) (User, error) {
-	db := Connect()
-	fmt.Println(serch)
-	u := User{}
-	result := db.Debug().Where(serch).First(&u)
-	fmt.Println(u, result)
-	return u, result.Error
-}
-
+// idを引数にユーザーを削除(deleted_atに日付を追加)
 func DeleteUser(id int) error {
 	db := Connect()
 	result := db.Debug().Delete(&User{}, id)
-	fmt.Println(result)
 	return result.Error
 }
 
+// 引数のUserで、更新する
 func UpdateUser(u User) (User, error) {
 	db := Connect()
 

@@ -24,7 +24,7 @@ func Connect() *gorm.DB {
 	dns := user + ":" + password + "@tcp(" + host + ":" + port + ")/" + database_name + "?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dns), &gorm.Config{})
 	if err != nil {
-		fmt.Println(err.Error(), db)
+		fmt.Println("db接続に失敗:", err.Error())
 	}
 	//db.Migrator().DropTable(&User{}) // テーブルを削除する
 	// テーブルがない場合は新規作成する(もしくはすでにある場合は消して作り直す)
