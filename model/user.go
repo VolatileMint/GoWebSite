@@ -7,7 +7,7 @@ import (
 )
 
 type User struct {
-	gorm.Model        // ID uint, CreatedAt time.Time, UpdatedAt time.Time, DeletedAt gorm.Deleted
+	gorm.Model        // ID uint, CreatedAt time.Time, UpdatedAt time.Time, DeletedAt gorm.DeletedAt
 	Name       string `json:"name" xml:"name" form:"name" query:"name"`
 	Password   string `json:"password" xml:"password" form:"password" query:"password"`
 	Age        int    `json:"age" xml:"age" form:"age" query:"age"`
