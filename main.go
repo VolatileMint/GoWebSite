@@ -7,6 +7,7 @@ import (
 
 func main() {
 	fmt.Println("わけわからん")
+	fmt.Println("今回はどうやろか")
 	// AddUser
 	user := model.User{Name: "Namae", Password: "pass", Age: 21}
 	ok := model.UserAdd(user)
