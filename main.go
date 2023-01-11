@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+
 	// AddUser
 	user := model.User{Name: "Namae", Password: "pass", Age: 21}
 	ok := model.UserAdd(user)
