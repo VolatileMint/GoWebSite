@@ -29,4 +29,22 @@ func main() {
 	} else {
 		fmt.Println(users)
 	}
+	//UpdateUser
+	oldId := 4
+	oldUser, err := model.GetUser(oldId)
+	if err != nil {
+		fmt.Println("GetUserに失敗:", err)
+	}
+
+	newUser := model.User{
+		Name:     "id4User",
+		Password: "4pass",
+		Age:      444,
+	}
+	new, err := model.UpdateUser(oldUser, newUser)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("変更前:", oldUser)
+	fmt.Println("変更後:", new)
 }

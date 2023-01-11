@@ -7,7 +7,7 @@ import (
 )
 
 type User struct {
-	gorm.Model        // ID uint, CreatedAt time.Time, UpdatedAt time.Time, DeletedAt gorm.DeletedAt
+	gorm.Model        // ID uint, CreatedAt time.Time, UpdatedAt time.Time, DeletedAt gorm.Deleted
 	Name       string `json:"name" xml:"name" form:"name" query:"name"`
 	Password   string `json:"password" xml:"password" form:"password" query:"password"`
 	Age        int    `json:"age" xml:"age" form:"age" query:"age"`
@@ -51,10 +51,16 @@ func DeleteUser(id int) error {
 }
 
 // 引数のUserで、更新する
-func UpdateUser(u User) (User, error) {
+func UpdateUser(user User, new User) (User, error) {
 	db := Connect()
 
-	result := db.Debug().First(&u)
+	db.First(&user).Debug()
+	user.Name = new.Name
+	user.Password = new.Password
+	user.Age = new.Age
+	fmt.Println("更新直前", user)
+	result := db.Save(&user).Debug()
+	fmt.Println("アップデートの成否", result.Error)
 
-	return u, result.Error
+	return user, result.Error
 }
