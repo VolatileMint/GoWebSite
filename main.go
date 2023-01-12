@@ -6,8 +6,6 @@ import (
 )
 
 func main() {
-	fmt.Println("わけわからん")
-	fmt.Println("今回はどうやろか")
 	// AddUser
 	user := model.User{Name: "Namae", Password: "pass", Age: 21}
 	ok := model.UserAdd(user)
@@ -35,7 +33,6 @@ func main() {
 	if err != nil {
 		fmt.Println("GetUserに失敗:", err)
 	}
-
 	newUser := model.User{
 		Name:     "id4User",
 		Password: "4pass",
@@ -47,4 +44,11 @@ func main() {
 	}
 	fmt.Println("変更前:", oldUser)
 	fmt.Println("変更後:", new)
+	//DeleteUser
+	delID := 2
+	err = model.DeleteUser(delID)
+	if err != nil {
+		fmt.Println(err)
+	}
+
 }
